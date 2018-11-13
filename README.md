@@ -1,2 +1,2 @@
-# saga-rabbitmq-demo
-Apache ServiceComb Saga with RabbitMQ.
+# Apache ServiceComb Saga Demo
+Apache ServiceComb Saga with SpringCloud.
