@@ -12,7 +12,7 @@ import java.util.List;
  * @author mingshan
  */
 @FeignClient(value = "order-service", fallback = OrderFeignHystrix.class)
-public interface OrderService {
+public interface OrderFeignApi {
 
     /**
      * Gets order by id.

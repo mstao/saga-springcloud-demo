@@ -2,7 +2,7 @@ package me.mingshan.saga.api.order.service.hystrix;
 
 import me.mingshan.saga.api.order.model.dto.OrderDTO;
 import me.mingshan.saga.api.order.model.vo.OrderVO;
-import me.mingshan.saga.api.order.service.OrderService;
+import me.mingshan.saga.api.order.service.OrderFeignApi;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * @author mingshan
  */
 @Component
-public class OrderFeignHystrix implements OrderService {
+public class OrderFeignHystrix implements OrderFeignApi {
     @Override
     public OrderVO getById(String id) {
         return null;
