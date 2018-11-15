@@ -1,43 +1,21 @@
 package me.mingshan.saga.api.product.model.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Getter
+@Setter
+@ToString
 public class ProductDTO implements Serializable {
+    private static final long serialVersionUID = 3725687939544618493L;
+
     private String name;
     private int stock;
     private BigDecimal price;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductDTO{" +
-                "name='" + name + '\'' +
-                ", stock=" + stock +
-                ", price=" + price +
-                '}';
-    }
 }

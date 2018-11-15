@@ -6,8 +6,6 @@ import me.mingshan.saga.api.product.service.hystrix.ProductFeignHystrix;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @FeignClient(value = "product-service", fallback = ProductFeignHystrix.class)
 public interface ProductFeignApi {
     /**

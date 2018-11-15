@@ -1,56 +1,24 @@
 package me.mingshan.saga.api.product.model.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * @author mingshan
  */
+@Getter
+@Setter
+@ToString
 public class ProductVO implements Serializable {
+    private static final long serialVersionUID = 3808070984328103577L;
+
     private String id;
     private String name;
     private int stock;
     private BigDecimal price;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductVO{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", stock=" + stock +
-                ", price=" + price +
-                '}';
-    }
 }
