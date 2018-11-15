@@ -11,9 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    @Autowried
+    private ProductDao productDao;
+
     @Override
     public ProductVO getById(String id) {
-        return null;
+        return pro;
     }
 
     @Override
