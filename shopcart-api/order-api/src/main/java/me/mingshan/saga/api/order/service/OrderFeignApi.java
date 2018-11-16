@@ -21,7 +21,7 @@ public interface OrderFeignApi {
      * @return
      */
     @GetMapping(value = "/api/order/{id}")
-    OrderVO getById(@PathVariable("id") String id);
+    OrderVO getById(@PathVariable("id") Long id);
 
     /**
      * Gets orders by user id.
@@ -30,7 +30,7 @@ public interface OrderFeignApi {
      * @return
      */
     @GetMapping(value = "/api/order/getByUserId/{userId}")
-    List<OrderVO> getByUserId(@PathVariable("userId") String userId);
+    List<OrderVO> getByUserId(@PathVariable("userId") long userId);
 
     /**
      * Saves order

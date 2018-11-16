@@ -1,4 +1,4 @@
-package me.mingshan.saga.api.order.model.vo;
+package me.mingshan.saga.order.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,20 +8,16 @@ import me.mingshan.saga.api.order.enums.OrderStatus;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * @author mingshan
- */
 @Getter
 @Setter
 @ToString
-public class OrderVO implements Serializable {
-    private static final long serialVersionUID = 8560422613763850415L;
+public class Order implements Serializable {
+    private static final long serialVersionUID = -2066544283413715828L;
 
     private long id;
+    private long number;
     private long userId;
     private long productId;
-    private long number;
     private BigDecimal price;
     private OrderStatus status;
-
 }

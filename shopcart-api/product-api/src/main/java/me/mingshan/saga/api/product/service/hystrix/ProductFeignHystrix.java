@@ -5,13 +5,14 @@ import me.mingshan.saga.api.product.model.vo.ProductVO;
 import me.mingshan.saga.api.product.service.ProductFeignApi;
 
 public class ProductFeignHystrix implements ProductFeignApi {
+
     @Override
-    public ProductVO getById(String id) {
+    public ProductVO getById(Long id) {
         return null;
     }
 
     @Override
-    public String save(ProductDTO productDTO) {
+    public Long save(ProductDTO productDTO) {
         return null;
     }
 
@@ -21,7 +22,7 @@ public class ProductFeignHystrix implements ProductFeignApi {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
 
     }
 }

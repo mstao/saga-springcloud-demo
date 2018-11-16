@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="me.mingshan.saga.product.dao.ProductDao">
+  <resultMap id="productResultMap" type="me.mingshan.saga.product.entity.Product">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="stock" property="stock"/>
+    <result column="price" property="price"/>
+    <result column="gmt_create" property="gmtCreate"/>
+    <result column="gmt_modified" property="gmtModified"/>
+  </resultMap>
 
   <!-- useGeneratedKeys="true"  -->
-  <insert id="insert" keyProperty="orderId">
-        INSERT INTO s_product (
-          id, name, stock, price, gmt_create, gmt_modified
-        )
-        VALUES (
-          #{id}, #{name}, #{stock}, #{price}, NOW(), NOW()
-        )
-    </insert>
+  <insert id="insert">
+    INSERT INTO s_product (
+      id, name, stock, price, gmt_create, gmt_modified
+    )
+    VALUES (
+      #{id}, #{name}, #{stock}, #{price}, NOW(), NOW()
+    )
+  </insert>
 
-  <select id="findById" parameterType="java.lang.String" resultType="me.mingshan.saga.product.entity.Product">
-        SELECT * FROM s_product WHERE id = #{id}
-    </select>
+  <select id="findById" parameterType="java.lang.Long" resultMap="productResultMap">
+    SELECT * FROM s_product WHERE id = #{id}
+  </select>
 </mapper>

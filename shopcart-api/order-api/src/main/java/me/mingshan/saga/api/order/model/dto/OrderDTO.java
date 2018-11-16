@@ -18,6 +18,7 @@ public class OrderDTO implements Serializable {
 
     private long userId;
     private long productId;
+    private long number;
     private int price;
     private OrderStatus status;
 

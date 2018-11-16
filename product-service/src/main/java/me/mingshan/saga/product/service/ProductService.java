@@ -1,8 +1,6 @@
 package me.mingshan.saga.product.service;
 
 import me.mingshan.saga.api.product.model.dto.ProductDTO;
-import me.mingshan.saga.api.product.model.vo.ProductVO;
-import org.springframework.web.bind.annotation.*;
 
 /**
  * @author mingshan
@@ -14,8 +12,7 @@ public interface ProductService {
      * @param id
      * @return
      */
-    @GetMapping(value = "/api/product/{id}")
-    ProductVO getById(@PathVariable("id") String id);
+    ProductDTO getById(Long id);
 
     /**
      * Saves product
@@ -23,20 +20,17 @@ public interface ProductService {
      * @param productDTO
      * @return
      */
-    @PostMapping(value = "/api/product")
-    String save(ProductDTO productDTO);
+    Long save(ProductDTO productDTO);
 
     /**
      *
      * @param productDTO
      */
-    @PutMapping(value = "/api/product")
     void update(ProductDTO productDTO);
 
     /**
      *
      * @param id
      */
-    @DeleteMapping(value = "/api/product/{id}")
-    void delete(@PathVariable("id") String id);
+    void delete(Long id);
 }

@@ -67,6 +67,20 @@
       <artifactId>product-api</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>me.mingshan.saga</groupId>
+      <artifactId>shopcart-common-base</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>me.mingshan.saga</groupId>
+      <artifactId>shopcart-common-util</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.rakugakibox.spring.boot</groupId>
+      <artifactId>orika-spring-boot-starter</artifactId>
+    </dependency>
   </dependencies>
 
   <build>

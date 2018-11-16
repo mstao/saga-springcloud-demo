@@ -3,7 +3,9 @@ package me.mingshan.saga.api.product.service;
 import me.mingshan.saga.api.product.model.dto.ProductDTO;
 import me.mingshan.saga.api.product.model.vo.ProductVO;
 import me.mingshan.saga.api.product.service.hystrix.ProductFeignHystrix;
+import me.mingshan.saga.common.base.model.ResultModel;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(value = "product-service", fallback = ProductFeignHystrix.class)
@@ -15,7 +17,7 @@ public interface ProductFeignApi {
      * @return
      */
     @GetMapping(value = "/api/product/{id}")
-    ProductVO getById(@PathVariable("id") String id);
+    ResponseEntity<ResultModel<ProductVO>> getById(@PathVariable("id") Long id);
 
     /**
      * Saves product
@@ -24,7 +26,7 @@ public interface ProductFeignApi {
      * @return
      */
     @PostMapping(value = "/api/product")
-    String save(ProductDTO productDTO);
+    ResponseEntity<ResultModel<Long>> save(ProductDTO productDTO);
 
     /**
      *
@@ -38,5 +40,5 @@ public interface ProductFeignApi {
      * @param id
      */
     @DeleteMapping(value = "/api/product/{id}")
-    void delete(@PathVariable("id") String id);
+    void delete(@PathVariable("id") Long id);
 }

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ProductDao {
     Long insert(Product product);
 
-    void delete(Long orderId);
+    void delete(Long id);
 
     Product findById(Long id);
 }

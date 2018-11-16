@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.mingshan.saga.order.dao.OrderDao">
+  <resultMap id="orderResultMap" type="me.mingshan.saga.order.entity.Order">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="useId" property="userId"/>
+    <result column="productId" property="productId"/>
+    <result column="number" property="number"/>
+    <result column="price" property="price"/>
+    <result column="status" property="status"/>
+    <result column="gmt_create" property="gmtCreate"/>
+    <result column="gmt_modified" property="gmtModified"/>
+  </resultMap>
+
+  <insert id="insert">
+    INSERT INTO s_order (
+      id, name, userId, productId, number, price, status, gmt_create, gmt_modified
+    )
+    VALUES (
+      #{id}, #{name}, #{userId}, #{productId}, #{number}, #{price}, #{status}, NOW(), NOW()
+    )
+  </insert>
+
+  <select id="findById" parameterType="java.lang.Long" resultMap="orderResultMap">
+    SELECT * FROM s_order WHERE id = #{id}
+  </select>
+</mapper>
