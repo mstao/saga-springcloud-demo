@@ -10,7 +10,6 @@
     <result column="gmt_modified" property="gmtModified"/>
   </resultMap>
 
-  <!-- useGeneratedKeys="true"  -->
   <insert id="insert">
     INSERT INTO s_product (
       id, name, stock, price, gmt_create, gmt_modified

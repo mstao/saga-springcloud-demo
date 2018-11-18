@@ -15,7 +15,7 @@
 
   <insert id="insert">
     INSERT INTO s_order (
-      id, name, userId, productId, number, price, status, gmt_create, gmt_modified
+      id, name, user_id, product_id, number, price, status, gmt_create, gmt_modified
     )
     VALUES (
       #{id}, #{name}, #{userId}, #{productId}, #{number}, #{price}, #{status}, NOW(), NOW()
@@ -23,6 +23,12 @@
   </insert>
 
   <select id="findById" parameterType="java.lang.Long" resultMap="orderResultMap">
-    SELECT * FROM s_order WHERE id = #{id}
+    SELECT id, name, user_id, product_id, number, price, status, gmt_create, gmt_modified
+    FROM s_order WHERE id = #{id}
+  </select>
+
+  <select id="findByUserId" parameterType="java.lang.Long" resultMap="orderResultMap">
+    SELECT id, name, userId, productId, number, price, status, gmt_create, gmt_modified
+    FROM s_order where user_id = #{userId}
   </select>
 </mapper>

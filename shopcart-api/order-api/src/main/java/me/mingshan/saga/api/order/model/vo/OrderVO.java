@@ -20,7 +20,7 @@ public class OrderVO implements Serializable {
     private long id;
     private long userId;
     private long productId;
-    private long number;
+    private String number;
     private BigDecimal price;
     private OrderStatus status;
 

@@ -15,9 +15,9 @@ public class Order implements Serializable {
     private static final long serialVersionUID = -2066544283413715828L;
 
     private long id;
-    private long number;
+    private String number;
     private long userId;
     private long productId;
     private BigDecimal price;
-    private OrderStatus status;
+    private int status;
 }
