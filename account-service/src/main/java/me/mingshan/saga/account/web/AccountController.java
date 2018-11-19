@@ -8,10 +8,7 @@ import me.mingshan.saga.common.base.model.ResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/account")
@@ -23,8 +20,8 @@ public class AccountController {
     @Autowired
     private MapperFacade orikaMapperFacade;
 
-    @GetMapping(value = "/api/account/{id}")
-    public ResponseEntity<ResultModel> getById(@PathVariable("id") Long id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ResultModel<UserVO>> getById(@PathVariable("id") Long id) {
         UserDTO userDTO = accountService.getById(id);
         UserVO userVO = orikaMapperFacade.map(userDTO, UserVO.class);
 
@@ -34,4 +31,12 @@ public class AccountController {
         return new ResponseEntity<>(resultModel, HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<ResultModel<Long>> save(@RequestBody UserDTO userDTO) {
+        Long id = accountService.insert(userDTO);
+        ResultModel<Long> resultModel = new ResultModel<>();
+        resultModel.setCode(0L);
+        resultModel.setContent(id);
+        return new ResponseEntity<>(resultModel, HttpStatus.OK);
+    }
 }

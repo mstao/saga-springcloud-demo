@@ -3,6 +3,7 @@ package me.mingshan.saga.api.product.service;
 import me.mingshan.saga.api.product.model.dto.ProductDTO;
 import me.mingshan.saga.api.product.model.vo.ProductVO;
 import me.mingshan.saga.api.product.service.hystrix.ProductFeignHystrix;
+import me.mingshan.saga.common.base.exception.ServiceException;
 import me.mingshan.saga.common.base.model.ResultModel;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +27,14 @@ public interface ProductFeignApi {
      * @return
      */
     @PostMapping(value = "/api/product")
-    ResponseEntity<ResultModel<Long>> save(ProductDTO productDTO);
+    ResponseEntity<ResultModel<Long>> save(@RequestBody ProductDTO productDTO) throws ServiceException;
 
     /**
      *
      * @param productDTO
      */
     @PutMapping(value = "/api/product")
-    void update(ProductDTO productDTO);
+    void update(@RequestBody ProductDTO productDTO);
 
     /**
      *
@@ -43,5 +44,5 @@ public interface ProductFeignApi {
     void delete(@PathVariable("id") Long id);
 
     @PutMapping(value = "/api/product/decreaseStock")
-    void decreaseStock(Long id, Integer number);
+    void decreaseStock(@RequestParam("id") Long id, @RequestParam("number") Integer number) throws ServiceException;
 }

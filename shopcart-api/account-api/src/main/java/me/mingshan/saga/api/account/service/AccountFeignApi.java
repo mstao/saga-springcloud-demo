@@ -26,14 +26,14 @@ public interface AccountFeignApi {
      * @return
      */
     @PostMapping(value = "/api/account")
-    ResponseEntity<ResultModel<Long>> save(UserDTO userDTO);
+    ResponseEntity<ResultModel<Long>> save(@RequestBody UserDTO userDTO);
 
     /**
      *
      * @param userDTO
      */
     @PutMapping(value = "/api/account")
-    void update(UserDTO userDTO);
+    void update(@RequestBody UserDTO userDTO);
 
     /**
      *

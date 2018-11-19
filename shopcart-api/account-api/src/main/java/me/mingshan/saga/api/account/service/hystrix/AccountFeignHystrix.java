@@ -3,17 +3,20 @@ package me.mingshan.saga.api.account.service.hystrix;
 import me.mingshan.saga.api.account.model.dto.UserDTO;
 import me.mingshan.saga.api.account.model.vo.UserVO;
 import me.mingshan.saga.api.account.service.AccountFeignApi;
+import me.mingshan.saga.common.base.model.ResultModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AccountFeignHystrix implements AccountFeignApi {
+
     @Override
-    public UserVO getById(String id) {
+    public ResponseEntity<ResultModel<UserVO>> getById(Long id) {
         return null;
     }
 
     @Override
-    public String save(UserDTO userDTO) {
+    public ResponseEntity<ResultModel<Long>> save(UserDTO userDTO) {
         return null;
     }
 
@@ -23,7 +26,7 @@ public class AccountFeignHystrix implements AccountFeignApi {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
 
     }
 }

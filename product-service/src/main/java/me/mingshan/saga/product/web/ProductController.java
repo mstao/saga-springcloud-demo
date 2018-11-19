@@ -47,7 +47,7 @@ public class ProductController {
      * @param productDTO
      * @return
      */
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<ResultModel<Long>> save(ProductDTO productDTO) throws ServiceException {
         Long id;
         try {
@@ -68,7 +68,7 @@ public class ProductController {
      *
      * @param productDTO
      */
-    @PutMapping()
+    @PutMapping
     public void update(ProductDTO productDTO) {
 
     }

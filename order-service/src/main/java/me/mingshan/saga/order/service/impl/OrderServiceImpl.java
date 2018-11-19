@@ -95,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus(OrderStatus.PROCESSING.getCode());
         orderDao.insert(order);
         // Decrease stock
-        productFeignApi
+        productFeignApi.decreaseStock(order.getProductId(), 1);
         return order.getId();
     }
 

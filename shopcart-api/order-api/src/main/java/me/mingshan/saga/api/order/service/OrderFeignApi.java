@@ -1,9 +1,11 @@
 package me.mingshan.saga.api.order.service;
 
 import me.mingshan.saga.api.order.model.dto.OrderDTO;
+import me.mingshan.saga.api.order.model.vo.OrderVO;
 import me.mingshan.saga.api.order.service.hystrix.OrderFeignHystrix;
 import me.mingshan.saga.common.base.model.ResultModel;
 import org.springframework.cloud.openfeign.FeignClient;
+import me.mingshan.saga.common.base.exception.ServiceException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +22,7 @@ public interface OrderFeignApi {
      * @return
      */
     @GetMapping(value = "/api/order/{id}")
-    ResponseEntity<ResultModel> getById(@PathVariable("id") Long id);
+    ResponseEntity<ResultModel<OrderVO>> getById(@PathVariable("id") Long id);
 
     /**
      * Gets orders by user id.
@@ -29,7 +31,7 @@ public interface OrderFeignApi {
      * @return
      */
     @GetMapping(value = "/api/order/getByUserId/{userId}")
-    ResponseEntity<ResultModel> getByUserId(@PathVariable("userId") long userId);
+    ResponseEntity<ResultModel<OrderVO>> getByUserId(@PathVariable("userId") long userId);
 
     /**
      * Saves order
@@ -38,14 +40,14 @@ public interface OrderFeignApi {
      * @return
      */
     @PostMapping(value = "/api/order")
-    ResponseEntity<ResultModel> save(OrderDTO orderDTO);
+    ResponseEntity<ResultModel<Long>> save(@RequestBody OrderDTO orderDTO) throws ServiceException;
 
     /**
      *
      * @param orderDTO
      */
     @PutMapping(value = "/api/order")
-    void update(OrderDTO orderDTO);
+    void update(@RequestBody OrderDTO orderDTO);
 
     /**
      *

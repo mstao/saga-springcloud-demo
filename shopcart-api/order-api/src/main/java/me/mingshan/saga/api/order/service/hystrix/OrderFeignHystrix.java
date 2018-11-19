@@ -3,27 +3,29 @@ package me.mingshan.saga.api.order.service.hystrix;
 import me.mingshan.saga.api.order.model.dto.OrderDTO;
 import me.mingshan.saga.api.order.model.vo.OrderVO;
 import me.mingshan.saga.api.order.service.OrderFeignApi;
+import me.mingshan.saga.common.base.exception.ServiceException;
+import me.mingshan.saga.common.base.model.ResultModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author mingshan
  */
 @Component
 public class OrderFeignHystrix implements OrderFeignApi {
+
     @Override
-    public OrderVO getById(String id) {
+    public ResponseEntity<ResultModel<OrderVO>> getById(Long id) {
         return null;
     }
 
     @Override
-    public List<OrderVO> getByUserId(String userId) {
+    public ResponseEntity<ResultModel<OrderVO>> getByUserId(long userId) {
         return null;
     }
 
     @Override
-    public String save(OrderDTO orderDTO) {
+    public ResponseEntity<ResultModel<Long>> save(OrderDTO orderDTO) throws ServiceException {
         return null;
     }
 

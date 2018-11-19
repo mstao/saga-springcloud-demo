@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/order")
 public class OrderController {
 
     @Autowired
@@ -28,7 +30,7 @@ public class OrderController {
      * @param id
      * @return
      */
-    @GetMapping(value = "/api/order/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<ResultModel<OrderVO>> getById(@PathVariable("id") Long id) {
         OrderDTO orderDTO = orderService.getById(id);
         OrderVO orderVo = orikaMapperFacade.map(orderDTO, OrderVO.class);
@@ -46,7 +48,7 @@ public class OrderController {
      * @param userId
      * @return
      */
-    @GetMapping(value = "/api/order/getByUserId/{userId}")
+    @GetMapping(value = "/getByUserId/{userId}")
     public ResponseEntity<ResultModel<List<OrderVO>>> getByUserId(@PathVariable("userId") Long userId) {
         List<OrderDTO> orderDTOS = orderService.getByUserId(userId);
         List<OrderVO> orderVOS = orikaMapperFacade.mapAsList(orderDTOS, OrderVO.class);
@@ -63,7 +65,7 @@ public class OrderController {
      * @param orderDTO
      * @return
      */
-    @PostMapping(value = "/api/order")
+    @PostMapping
     public ResponseEntity<ResultModel<Long>> save(OrderDTO orderDTO) {
         Long id = 0L;
         try {
@@ -84,7 +86,7 @@ public class OrderController {
      *
      * @param orderDTO
      */
-    @PutMapping(value = "/api/order")
+    @PutMapping
     public void update(OrderDTO orderDTO) {
 
     }
@@ -93,7 +95,7 @@ public class OrderController {
      *
      * @param id
      */
-    @DeleteMapping(value = "/api/order/{id}")
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") String id) {
 
     }
