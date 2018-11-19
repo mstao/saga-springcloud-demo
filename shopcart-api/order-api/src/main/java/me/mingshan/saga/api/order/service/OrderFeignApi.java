@@ -1,12 +1,11 @@
 package me.mingshan.saga.api.order.service;
 
 import me.mingshan.saga.api.order.model.dto.OrderDTO;
-import me.mingshan.saga.api.order.model.vo.OrderVO;
 import me.mingshan.saga.api.order.service.hystrix.OrderFeignHystrix;
+import me.mingshan.saga.common.base.model.ResultModel;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author mingshan
@@ -21,7 +20,7 @@ public interface OrderFeignApi {
      * @return
      */
     @GetMapping(value = "/api/order/{id}")
-    OrderVO getById(@PathVariable("id") Long id);
+    ResponseEntity<ResultModel> getById(@PathVariable("id") Long id);
 
     /**
      * Gets orders by user id.
@@ -30,7 +29,7 @@ public interface OrderFeignApi {
      * @return
      */
     @GetMapping(value = "/api/order/getByUserId/{userId}")
-    List<OrderVO> getByUserId(@PathVariable("userId") long userId);
+    ResponseEntity<ResultModel> getByUserId(@PathVariable("userId") long userId);
 
     /**
      * Saves order
@@ -39,7 +38,7 @@ public interface OrderFeignApi {
      * @return
      */
     @PostMapping(value = "/api/order")
-    String save(OrderDTO orderDTO);
+    ResponseEntity<ResultModel> save(OrderDTO orderDTO);
 
     /**
      *

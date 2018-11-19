@@ -30,12 +30,12 @@ public class ProductController {
      * @return
      */
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ResultModel> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<ResultModel<ProductVO>> getById(@PathVariable("id") Long id) {
         ProductDTO productDTO = productService.getById(id);
         ProductVO productVO = orikaMapperFacade.map(productDTO, ProductVO.class);
 
-        ResultModel resultModel = new ResultModel();
-        resultModel.setCode(10001L);
+        ResultModel<ProductVO> resultModel = new ResultModel();
+        resultModel.setCode(0L);
         resultModel.setContent(productVO);
 
         return new ResponseEntity<>(resultModel, HttpStatus.OK);
@@ -48,7 +48,7 @@ public class ProductController {
      * @return
      */
     @PostMapping()
-    public ResponseEntity<ResultModel> save(ProductDTO productDTO) {
+    public ResponseEntity<ResultModel<Long>> save(ProductDTO productDTO) {
         Long id;
         try {
             id = productService.save(productDTO);
@@ -58,8 +58,8 @@ public class ProductController {
             resultModel.setMessage("Save product: " + productDTO + ", occurs error, reason: " + ExceptionUtil.getFullStackTrace(e));
             throw new ServiceException(resultModel, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        ResultModel resultModel = new ResultModel();
-        resultModel.setCode(10002L);
+        ResultModel<Long> resultModel = new ResultModel<>();
+        resultModel.setCode(0L);
         resultModel.setContent(id);
         return new ResponseEntity<>(resultModel, HttpStatus.OK);
     }

@@ -68,6 +68,16 @@
     </dependency>
     <dependency>
       <groupId>me.mingshan.saga</groupId>
+      <artifactId>product-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>me.mingshan.saga</groupId>
+      <artifactId>account-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>me.mingshan.saga</groupId>
       <artifactId>shopcart-common-base</artifactId>
       <version>${project.version}</version>
     </dependency>

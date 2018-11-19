@@ -3,7 +3,9 @@ package me.mingshan.saga.api.account.service;
 import me.mingshan.saga.api.account.model.dto.UserDTO;
 import me.mingshan.saga.api.account.model.vo.UserVO;
 import me.mingshan.saga.api.account.service.hystrix.AccountFeignHystrix;
+import me.mingshan.saga.common.base.model.ResultModel;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(value = "account-service", fallback = AccountFeignHystrix.class)
@@ -15,7 +17,7 @@ public interface AccountFeignApi {
      * @return
      */
     @GetMapping(value = "/api/account/{id}")
-    UserVO getById(@PathVariable("id") String id);
+    ResponseEntity<ResultModel<UserVO>> getById(@PathVariable("id") Long id);
 
     /**
      * Saves account
@@ -24,7 +26,7 @@ public interface AccountFeignApi {
      * @return
      */
     @PostMapping(value = "/api/account")
-    String save(UserDTO userDTO);
+    ResponseEntity<ResultModel<Long>> save(UserDTO userDTO);
 
     /**
      *
@@ -38,5 +40,5 @@ public interface AccountFeignApi {
      * @param id
      */
     @DeleteMapping(value = "/api/account/{id}")
-    void delete(@PathVariable("id") String id);
+    void delete(@PathVariable("id") Long id);
 }

@@ -8,6 +8,6 @@ public class GenerateOrderNumberImpl implements GenerateOrderNumber {
 
     @Override
     public String generate() {
-        return null;
+        return "123456";
     }
 }

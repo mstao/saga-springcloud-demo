@@ -26,5 +26,10 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
+    <dependency>
+      <groupId>me.mingshan.saga</groupId>
+      <artifactId>shopcart-common-base</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 </project>
