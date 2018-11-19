@@ -48,7 +48,7 @@ public class ProductController {
      * @return
      */
     @PostMapping()
-    public ResponseEntity<ResultModel<Long>> save(ProductDTO productDTO) {
+    public ResponseEntity<ResultModel<Long>> save(ProductDTO productDTO) throws ServiceException {
         Long id;
         try {
             id = productService.save(productDTO);
@@ -80,6 +80,12 @@ public class ProductController {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") String id) {
 
+    }
+
+    @PutMapping(value = "/decreaseStock")
+    public void decreaseStock(@RequestParam("id") Long id,
+                              @RequestParam("number") int number) {
+        productService.decreaseStock(id, number);
     }
 
 }

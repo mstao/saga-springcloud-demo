@@ -41,4 +41,7 @@ public interface ProductFeignApi {
      */
     @DeleteMapping(value = "/api/product/{id}")
     void delete(@PathVariable("id") Long id);
+
+    @PutMapping(value = "/api/product/decreaseStock")
+    void decreaseStock(Long id, Integer number);
 }

@@ -22,4 +22,12 @@
   <select id="findById" parameterType="java.lang.Long" resultMap="productResultMap">
     SELECT * FROM s_product WHERE id = #{id}
   </select>
+
+  <update id="decreaseStock">
+    UPDATE s_product SET stock = stock - number WHERE id = #{id}
+  </update>
+
+  <update id="increaseStock">
+    UPDATE s_product SET stock = stock + number WHERE id = #{id}
+  </update>
 </mapper>

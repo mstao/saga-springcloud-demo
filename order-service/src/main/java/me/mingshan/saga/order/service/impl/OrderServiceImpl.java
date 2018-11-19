@@ -15,10 +15,13 @@ import me.mingshan.saga.order.entity.Order;
 import me.mingshan.saga.order.service.GenerateOrderNumber;
 import me.mingshan.saga.order.service.OrderService;
 import me.mingshan.saga.order.util.OrderStatusUtil;
+import org.apache.servicecomb.saga.omega.context.annotations.SagaStart;
+import org.apache.servicecomb.saga.omega.transaction.annotations.Compensable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -64,6 +67,9 @@ public class OrderServiceImpl implements OrderService {
         return orikaMapperFacade.mapAsList(orders, OrderDTO.class);
     }
 
+    @SagaStart(timeout = 6000)
+    @Compensable(timeout = 5000, compensationMethod = "cancel")
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Long save(OrderDTO orderDTO) {
         ResultModel resultModel = new ResultModel();
@@ -88,7 +94,14 @@ public class OrderServiceImpl implements OrderService {
         order.setNumber(generateOrderNumber.generate());
         order.setStatus(OrderStatus.PROCESSING.getCode());
         orderDao.insert(order);
+        // Decrease stock
+        productFeignApi
         return order.getId();
+    }
+
+    public Long cancel(OrderDTO orderDTO) {
+        System.out.println("Order.cancel executed , data: " + orderDTO);
+        return 0L;
     }
 
     @Override

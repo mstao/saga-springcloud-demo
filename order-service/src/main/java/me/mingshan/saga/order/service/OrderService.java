@@ -1,6 +1,7 @@
 package me.mingshan.saga.order.service;
 
 import me.mingshan.saga.api.order.model.dto.OrderDTO;
+import me.mingshan.saga.common.base.exception.ServiceException;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface OrderService {
      * @param userId
      * @return
      */
-    List<OrderDTO> getByUserId(Long userId);
+    List<OrderDTO> getByUserId(Long userId) throws ServiceException;
 
     /**
      * Saves order
@@ -28,7 +29,7 @@ public interface OrderService {
      * @param orderDTO
      * @return
      */
-    Long save(OrderDTO orderDTO);
+    Long save(OrderDTO orderDTO) throws ServiceException;
 
     /**
      *
