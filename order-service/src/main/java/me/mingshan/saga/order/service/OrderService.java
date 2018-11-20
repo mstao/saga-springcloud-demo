@@ -35,11 +35,11 @@ public interface OrderService {
      *
      * @param orderDTO
      */
-    void update(OrderDTO orderDTO);
+    void update(OrderDTO orderDTO) throws ServiceException;
 
     /**
      *
      * @param id
      */
-    void delete(Long id);
+    void delete(Long id) throws ServiceException;
 }

@@ -90,8 +90,7 @@
     <dependency>
       <groupId>me.mingshan.saga</groupId>
       <artifactId>account-api</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>compile</scope>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 

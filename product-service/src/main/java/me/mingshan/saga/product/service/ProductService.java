@@ -21,7 +21,7 @@ public interface ProductService {
      * @param productDTO
      * @return
      */
-    Long save(ProductDTO productDTO);
+    Long save(ProductDTO productDTO) throws ServiceException;
 
     /**
      * Decrease the stock.

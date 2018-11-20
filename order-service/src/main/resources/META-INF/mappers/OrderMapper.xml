@@ -3,9 +3,8 @@
 <mapper namespace="me.mingshan.saga.order.dao.OrderDao">
   <resultMap id="orderResultMap" type="me.mingshan.saga.order.entity.Order">
     <id column="id" property="id"/>
-    <result column="name" property="name"/>
-    <result column="useId" property="userId"/>
-    <result column="productId" property="productId"/>
+    <result column="use_id" property="userId"/>
+    <result column="product_id" property="productId"/>
     <result column="number" property="number"/>
     <result column="price" property="price"/>
     <result column="status" property="status"/>
@@ -15,20 +14,20 @@
 
   <insert id="insert">
     INSERT INTO s_order (
-      id, name, user_id, product_id, number, price, status, gmt_create, gmt_modified
+      id, user_id, product_id, number, price, status, gmt_create, gmt_modified
     )
     VALUES (
-      #{id}, #{name}, #{userId}, #{productId}, #{number}, #{price}, #{status}, NOW(), NOW()
+      #{id}, #{userId}, #{productId}, #{number}, #{price}, #{status}, NOW(), NOW()
     )
   </insert>
 
   <select id="findById" parameterType="java.lang.Long" resultMap="orderResultMap">
-    SELECT id, name, user_id, product_id, number, price, status, gmt_create, gmt_modified
+    SELECT id, user_id, product_id, number, price, status, gmt_create, gmt_modified
     FROM s_order WHERE id = #{id}
   </select>
 
   <select id="findByUserId" parameterType="java.lang.Long" resultMap="orderResultMap">
-    SELECT id, name, userId, productId, number, price, status, gmt_create, gmt_modified
+    SELECT id, userId, productId, number, price, status, gmt_create, gmt_modified
     FROM s_order where user_id = #{userId}
   </select>
 </mapper>

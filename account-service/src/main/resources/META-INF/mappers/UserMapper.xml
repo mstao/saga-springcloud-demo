@@ -20,6 +20,6 @@
 
   <select id="findById" parameterType="java.lang.Long" resultMap="userResultMap">
     SELECT id, name, age, gmt_create, gmt_modified
-    FROM s_order WHERE id = #{id}
+    FROM s_user WHERE id = #{id}
   </select>
 </mapper>

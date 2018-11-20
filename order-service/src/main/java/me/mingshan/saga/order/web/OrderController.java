@@ -7,6 +7,8 @@ import me.mingshan.saga.common.base.exception.ServiceException;
 import me.mingshan.saga.common.base.model.ResultModel;
 import me.mingshan.saga.common.util.ExceptionUtil;
 import me.mingshan.saga.order.service.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/order")
 public class OrderController {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
     @Autowired
     private OrderService orderService;
 
@@ -66,16 +68,9 @@ public class OrderController {
      * @return
      */
     @PostMapping
-    public ResponseEntity<ResultModel<Long>> save(OrderDTO orderDTO) {
-        Long id = 0L;
-        try {
-            id = orderService.save(orderDTO);
-        } catch (Exception e) {
-            ResultModel resultModel = new ResultModel();
-            resultModel.setCode(10003L);
-            resultModel.setMessage("Save product: " + orderDTO + ", occurs error, reason: " + ExceptionUtil.getFullStackTrace(e));
-            throw new ServiceException(resultModel, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<ResultModel<Long>> save(@RequestBody OrderDTO orderDTO) {
+        LOGGER.info("Processing save order: {}", orderDTO);
+        Long id = orderService.save(orderDTO);
         ResultModel<Long> resultModel = new ResultModel<>();
         resultModel.setCode(0L);
         resultModel.setContent(id);

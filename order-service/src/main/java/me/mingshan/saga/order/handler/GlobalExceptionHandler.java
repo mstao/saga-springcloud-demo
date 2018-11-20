@@ -6,12 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.rmi.ServerException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ServerException.class)
+    @ExceptionHandler(ServiceException.class)
     public ResponseEntity<ResultModel> handleServiceException(ServiceException ex) {
         return new ResponseEntity<>(ex.getResult(), ex.getHttpStatus());
     }

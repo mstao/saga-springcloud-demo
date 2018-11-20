@@ -24,10 +24,10 @@
   </select>
 
   <update id="decreaseStock">
-    UPDATE s_product SET stock = stock - number WHERE id = #{id}
+    UPDATE s_product SET stock = stock - #{number} WHERE id = #{id}
   </update>
 
   <update id="increaseStock">
-    UPDATE s_product SET stock = stock + number WHERE id = #{id}
+    UPDATE s_product SET stock = stock + #{number} WHERE id = #{id}
   </update>
 </mapper>

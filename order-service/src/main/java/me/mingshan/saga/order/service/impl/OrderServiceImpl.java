@@ -43,7 +43,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private AccountFeignApi accountFeignApi;
 
-
     @Override
     public OrderDTO getById(Long id) {
         Order order = orderDao.findById(id);
@@ -71,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
     @Compensable(timeout = 5000, compensationMethod = "cancel")
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Long save(OrderDTO orderDTO) {
+    public Long save(OrderDTO orderDTO) throws ServiceException {
         ResultModel resultModel = new ResultModel();
         ResponseEntity<ResultModel<UserVO>> userResponseEntity = accountFeignApi.getById(orderDTO.getUserId());
         ResultModel<UserVO> userVOResultModel = userResponseEntity.getBody();
@@ -84,33 +83,39 @@ public class OrderServiceImpl implements OrderService {
         ResponseEntity<ResultModel<ProductVO>> responseEntity = productFeignApi.getById(orderDTO.getProductId());
         ResultModel<ProductVO> productResultModel = responseEntity.getBody();
         ProductVO productVO = productResultModel.getContent();
-        if (productVO.getStock() < 1) {
-            resultModel.setCode(12001);
-            resultModel.setMessage("The stock of product: " + productVO + "is not enough");
-            throw new ServiceException(resultModel, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        Order order = orikaMapperFacade.map(orderDTO, Order.class);
+//        if (productVO.getStock() < 1) {
+//            resultModel.setCode(12002);
+//            resultModel.setMessage("The stock of product: " + productVO + "is not enough");
+//            throw new ServiceException(resultModel, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+        Order order = new Order();
+        order.setUserId(orderDTO.getUserId());
+        order.setProductId(orderDTO.getProductId());
         order.setId(SnowflakeIdWorker.getInstance().nextId());
         order.setNumber(generateOrderNumber.generate());
         order.setStatus(OrderStatus.PROCESSING.getCode());
+        order.setPrice(productVO.getPrice());
         orderDao.insert(order);
+        // pay ...
         // Decrease stock
         productFeignApi.decreaseStock(order.getProductId(), 1);
+
         return order.getId();
     }
 
-    public Long cancel(OrderDTO orderDTO) {
+    @Transactional(rollbackFor = Exception.class)
+    public Long cancel(OrderDTO orderDTO)  throws ServiceException {
         System.out.println("Order.cancel executed , data: " + orderDTO);
         return 0L;
     }
 
     @Override
-    public void update(OrderDTO orderDTO) {
+    public void update(OrderDTO orderDTO) throws ServiceException {
 
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) throws ServiceException {
 
     }
 }
