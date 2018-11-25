@@ -17,6 +17,8 @@ import me.mingshan.saga.order.service.OrderService;
 import me.mingshan.saga.order.util.OrderStatusUtil;
 import org.apache.servicecomb.saga.omega.context.annotations.SagaStart;
 import org.apache.servicecomb.saga.omega.transaction.annotations.Compensable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,7 @@ import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Autowired
     private OrderDao orderDao;
@@ -83,11 +86,7 @@ public class OrderServiceImpl implements OrderService {
         ResponseEntity<ResultModel<ProductVO>> responseEntity = productFeignApi.getById(orderDTO.getProductId());
         ResultModel<ProductVO> productResultModel = responseEntity.getBody();
         ProductVO productVO = productResultModel.getContent();
-//        if (productVO.getStock() < 1) {
-//            resultModel.setCode(12002);
-//            resultModel.setMessage("The stock of product: " + productVO + "is not enough");
-//            throw new ServiceException(resultModel, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
+
         Order order = new Order();
         order.setUserId(orderDTO.getUserId());
         order.setProductId(orderDTO.getProductId());
@@ -100,12 +99,14 @@ public class OrderServiceImpl implements OrderService {
         // Decrease stock
         productFeignApi.decreaseStock(order.getProductId(), 1);
 
-        return order.getId();
+        throw new IllegalArgumentException("参数错误");
+        //return order.getId();
     }
 
     @Transactional(rollbackFor = Exception.class)
     public Long cancel(OrderDTO orderDTO)  throws ServiceException {
-        System.out.println("Order.cancel executed , data: " + orderDTO);
+        LOGGER.info("Order.cancel executed , data: {}", orderDTO);
+        //orderDao.delete();
         return 0L;
     }
 

@@ -15,6 +15,8 @@
     <module>order-service</module>
     <module>product-service</module>
     <module>shopcart-common</module>
+    <module>shopcart-gateway</module>
+    <module>payment-service</module>
   </modules>
 
   <parent>
@@ -36,8 +38,8 @@
     <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
     <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
     <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
-    <saga.version>0.3.0-SNAPSHOT</saga.version>
-    <mysql-connector-java.version>5.1.40</mysql-connector-java.version>
+    <saga.version>0.2.1</saga.version>
+    <mysql-connector-java.version>8.0.13</mysql-connector-java.version>
     <HikariCP.version>3.2.0</HikariCP.version>
     <orika-spring-boot-starter.version>1.8.0</orika-spring-boot-starter.version>
     <mybatis.version>3.4.2</mybatis.version>
@@ -73,6 +75,12 @@
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>${mysql-connector-java.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>com.zaxxer</groupId>

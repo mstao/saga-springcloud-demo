@@ -19,6 +19,7 @@
     <module>order-api</module>
     <module>account-api</module>
     <module>product-api</module>
+    <module>payment-api</module>
   </modules>
 
   <properties>

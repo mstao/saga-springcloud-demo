@@ -1,0 +1,24 @@
+server:
+  port: 8085
+
+mybatis:
+  config-location: classpath:META-INF/mybatis-config.xml
+  mapper-locations: classpath:META-INF/mappers/*.xml
+
+spring:
+  application:
+    name: transaction-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sagatest?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: admin
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+feign:
+  hystrix:
+    enabled: true

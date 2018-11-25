@@ -45,7 +45,6 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void decreaseStock(Long id, Integer number) throws ServiceException {
-        productDao.decreaseStock(id, number);
         Product product = productDao.findById(id);
         if (product.getStock() < number) {
             ResultModel resultModel = new ResultModel();
@@ -54,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
             throw new ServiceException(resultModel, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+        productDao.decreaseStock(id, number);
     }
 
     @Override
